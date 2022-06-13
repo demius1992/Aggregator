@@ -10,23 +10,19 @@ type FlatsForRentService struct {
 }
 
 func (f *FlatsForRentService) GetFlatsForDay(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetFlatsForDay(page)
 }
 
 func (f *FlatsForRentService) GetFlatsLongRent(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetFlatsLongRent(page)
 }
 
 func (f *FlatsForRentService) GetCottagesForDay(page int) ([]models.Cottages, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetCottagesForDay(page)
 }
 
 func (f *FlatsForRentService) GetCottagesLongRent(page int) ([]models.Cottages, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetCottagesLongRent(page)
 }
 
 func NewFlatsForRentService(repo repository.FlatsForRent) *FlatsForRentService {

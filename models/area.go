@@ -8,7 +8,7 @@ type Areas struct {
 	Info        string `json:"-"`
 	Description string `json:"description"`
 	Link        string `json:"link"`
-	Type        string `json:"type"`
+	Typ         string `json:"typ"`
 }
 
 type GetAllAreas struct {

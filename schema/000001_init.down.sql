@@ -1,4 +1,4 @@
-DROP TYPE cottageType;
+DROP TYPE cottage_type;
 DROP TYPE rent;
 
 DROP TABLE flats;

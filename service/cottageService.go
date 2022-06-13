@@ -10,18 +10,15 @@ type CottagesService struct {
 }
 
 func (c *CottagesService) GetAllHouses(page int) ([]models.Cottages, error) {
-	//TODO implement me
-	panic("implement me")
+	return c.repo.GetAllHouses(page)
 }
 
 func (c *CottagesService) GetAllAreas(page int) ([]models.Areas, error) {
-	//TODO implement me
-	panic("implement me")
+	return c.repo.GetAllAreas(page)
 }
 
 func (c *CottagesService) GetAllDacha(page int) ([]models.Cottages, error) {
-	//TODO implement me
-	panic("implement me")
+	return c.repo.GetAllDacha(page)
 }
 
 func NewCottagesService(repo repository.Cottages) *CottagesService {

@@ -9,7 +9,7 @@ type Cottages struct {
 	Description string `json:"description"`
 	Link        string `json:"link"`
 	Rooms       int    `json:"rooms"`
-	Type        string `json:"type"`
+	Typ         string `json:"typ"`
 }
 
 type GetAllCottages struct {
