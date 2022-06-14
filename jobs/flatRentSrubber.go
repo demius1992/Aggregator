@@ -16,7 +16,7 @@ import (
 func flatLongRentCollector(db *pgxpool.Pool) error {
 	c := colly.NewCollector(
 		colly.AllowedDomains("domovita.by", "https://domovita.by"),
-		colly.CacheDir("https://domovita.by"))
+		colly.CacheDir("https"))
 	c.OnHTML(".found_full", func(e *colly.HTMLElement) {
 		attr := e.ChildText("a")
 		mapMarker := e.ChildText(".gr.mb-5.fs-12")
@@ -52,6 +52,9 @@ func flatLongRentCollector(db *pgxpool.Pool) error {
 	for i := 1; i > 0; i++ {
 		URL := fmt.Sprintf("https://domovita.by/vitebsk/flats/rent?page=%d", i)
 		if err := c.Visit(URL); err != nil {
+			if err.Error() != "Not Found" {
+				logrus.Printf("an error uccured in flatLongRentCollector while visiting URL %s", err.Error())
+			}
 			break
 		}
 	}

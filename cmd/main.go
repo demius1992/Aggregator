@@ -14,6 +14,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -60,9 +61,29 @@ func main() {
 	}()
 	logrus.Println("Application started")
 
+	ticker := time.NewTicker(30 * time.Minute)
+	done := make(chan bool)
+
+	go func() {
+		for {
+			select {
+			case <-done:
+				ticker.Stop()
+				return
+			case <-ticker.C:
+				if err := jobs.Collect(db); err != nil {
+					logrus.Printf("an error occured while collecting data %s", err.Error())
+				}
+			}
+		}
+	}()
+
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
+
+	done <- true
+	logrus.Println("ticker stopped")
 
 	logrus.Println("application is shutting down")
 

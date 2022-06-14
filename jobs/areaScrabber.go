@@ -14,7 +14,7 @@ import (
 func areaCollector(db *pgxpool.Pool) error {
 	c := colly.NewCollector(
 		colly.AllowedDomains("domovita.by", "https://domovita.by"),
-		colly.CacheDir("https://domovita.by"))
+		colly.CacheDir("https"))
 	c.OnHTML(".found_full", func(e *colly.HTMLElement) {
 		attr := e.ChildText("a")
 		mapMarker := e.ChildText(".gr.mb-5.fs-12")
@@ -47,6 +47,9 @@ func areaCollector(db *pgxpool.Pool) error {
 		URL := fmt.Sprintf("https://domovita.by/vitebsk/area/sale?page=%d", i)
 		err := c.Visit(URL)
 		if err != nil {
+			if err.Error() != "Not Found" {
+				logrus.Printf("an error uccured in areaCollector while visiting URL %s", err.Error())
+			}
 			break
 		}
 	}

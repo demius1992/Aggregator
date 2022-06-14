@@ -16,7 +16,7 @@ import (
 func flatDayRentCollector(db *pgxpool.Pool) error {
 	c := colly.NewCollector(
 		colly.AllowedDomains("domovita.by", "https://domovita.by"),
-		colly.CacheDir("https://domovita.by"))
+		colly.CacheDir("https"))
 	c.OnHTML(".item-cell", func(e *colly.HTMLElement) {
 		mapMarker := e.ChildText("div.fs-12.gr")
 		price := e.ChildText(".pop_desc__price-orange") + " " +
@@ -51,6 +51,9 @@ func flatDayRentCollector(db *pgxpool.Pool) error {
 	for i := 1; i > 0; i++ {
 		URL := fmt.Sprintf("https://domovita.by/vitebsk/flats-for-day/rent?page=%d", i)
 		if err := c.Visit(URL); err != nil {
+			if err.Error() != "Not Found" {
+				logrus.Printf("an error uccured in flatDayRentCollector while visiting URL %s", err.Error())
+			}
 			break
 		}
 	}
