@@ -66,7 +66,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		cottagesForDay := flatsForRent.Group("/cottages-for-day")
 		{
-			cottagesForDay.GET("/:page", h.getCottagesForDay) //Get available cottages for long rent
+			cottagesForDay.GET("/:page", h.getCottagesForDay) //Get available cottages for day rent
 		}
 		cottagesLongRent := flatsForRent.Group("/cottages-for-long")
 		{
