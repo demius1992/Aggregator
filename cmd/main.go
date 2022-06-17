@@ -19,7 +19,7 @@ import (
 
 func main() {
 	var wg sync.WaitGroup
-	wg.Add(1)
+	tickTime := 30 * time.Minute //ticker time in minutes for periodical collection the data
 
 	if err := initConfig(); err != nil {
 		logrus.Fatalf("error initializing gonfigs %s", err.Error())
@@ -40,13 +40,9 @@ func main() {
 		logrus.Fatalf("failed to initialize db %s", err.Error())
 	}
 
-	go func() {
-		defer wg.Done()
-		if err := jobs.Collect(db); err != nil {
-			logrus.Printf("an error occured while collecting data %s", err.Error())
-		}
-	}()
-	wg.Wait()
+	if err := jobs.Collect(db, &wg); err != nil {
+		logrus.Printf("an error occured while collecting data %s", err.Error())
+	}
 
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
@@ -61,8 +57,8 @@ func main() {
 	}()
 	logrus.Println("Application started")
 
-	ticker := time.NewTicker(30 * time.Minute)
-	done := make(chan bool)
+	ticker := time.NewTicker(tickTime)
+	done := make(chan struct{})
 
 	go func() {
 		for {
@@ -71,7 +67,7 @@ func main() {
 				ticker.Stop()
 				return
 			case <-ticker.C:
-				if err := jobs.Collect(db); err != nil {
+				if err := jobs.Collect(db, &wg); err != nil {
 					logrus.Printf("an error occured while collecting data %s", err.Error())
 				}
 			}
@@ -82,7 +78,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
 
-	done <- true
+	done <- struct{}{}
 	logrus.Println("ticker stopped")
 
 	logrus.Println("application is shutting down")
@@ -90,7 +86,6 @@ func main() {
 	if err = srv.ShutDown(context.Background()); err != nil {
 		logrus.Errorf("an error occured while server shutting down: %s", err.Error())
 	}
-
 	db.Close()
 }
 

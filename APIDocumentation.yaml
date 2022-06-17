@@ -4,7 +4,7 @@ info:
   description: "This is an apartment aggregator that collects information about available apartments, cottages and plots for purchase or rent"
   version: 1.0.0
 host: localhost:8080
-basePath: /flats
+basePath: /
 schemes:
   - http
 paths:
