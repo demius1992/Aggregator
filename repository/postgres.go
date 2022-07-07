@@ -8,6 +8,12 @@ import (
 	"time"
 )
 
+const (
+	Flat        = "flats"
+	Cottage     = "cottages"
+	FlatForRent = "flats_for_rent"
+)
+
 type Config struct {
 	Host     string
 	Port     string

@@ -1,0 +1,332 @@
+swagger: "2.0"
+info:
+  title: "Apartment aggregator"
+  description: "This is an apartment aggregator that collects information about available apartments, cottages and plots for purchase or rent"
+  version: 1.0.0
+host: localhost:8080
+basePath: /
+schemes:
+  - http
+paths:
+  /flats/sale/{page}:
+    get:
+      tags:
+        - "Flats"
+      summary: "Returns all available apartments to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+  /flats/sale/one-room-flats/{page}:
+    get:
+      tags:
+        - "Flats"
+      summary: "Returns all available one room apartments to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/sale/two-room-flats/{page}:
+    get:
+      tags:
+        - "Flats"
+      summary: "Returns all available two room apartments to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/sale/three-room-flats/{page}:
+    get:
+      tags:
+        - "Flats"
+      summary: "Returns all available three room apartments to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/sale/three-more-room-flats/{page}:
+    get:
+      tags:
+        - "Flats"
+      summary: "Returns all available more than three room apartments to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /cottages/sale/houses/{page}:
+    get:
+      tags:
+        - "Cottages"
+      summary: "Returns all available houses to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cottages"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /cottages/sale/areas/{page}:
+    get:
+      tags:
+        - "Cottages"
+      summary: "Returns all available areas to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Areas"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /cottages/sale/vitebskiyi-rayion/dacha/{page}:
+    get:
+      tags:
+        - "Cottages"
+      summary: "Returns all available country houses to purchase."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cottages"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/rent/flats-for-day/{page}:
+    get:
+      tags:
+        - "Flats for rent"
+      summary: "Returns all available flats for day/days rent."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/rent/flats-for-long/{page}:
+    get:
+      tags:
+        - "Flats for rent"
+      summary: "Returns all available flats for long rent."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Flats"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/rent/cottages-for-day/{page}:
+    get:
+      tags:
+        - "Flats for rent"
+      summary: "Returns all available cottages for day rent."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cottages"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+  /flats/rent/cottages-for-long/{page}:
+    get:
+      tags:
+        - "Flats for rent"
+      summary: "Returns all available cottages for long rent."
+      parameters:
+        - in: "path"
+          name: "page"
+          required: true
+          type: "integer"
+          description: "Parameter description."
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cottages"
+        "400":
+          description: "invalid page param"
+        "500":
+          description: "some status internal server error"
+
+definitions:
+  Flats:
+    type: "object"
+    required:
+      - "name"
+      - "photoUrls"
+    properties:
+      Id:
+        type: "integer"
+        format: "int64"
+      Title:
+        type: "string"
+      MapMarker:
+        type: "string"
+      Price:
+        type: "string"
+      Info:
+        type: "string"
+      Link:
+        type: "string"
+      Rooms:
+        type: "integer"
+      Typ:
+        type: "string"
+        enum:
+          - "flatDayRent"
+          - "flatLongRent"
+          - "cottageDayRent"
+          - "cottageLongRent"
+  Cottages:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+      Tittle:
+        type: "string"
+      MapMarker:
+        type: "string"
+      Price:
+        type: "string"
+      Info:
+        type: "string"
+      Description:
+        type: "string"
+      Link:
+        type: "string"
+      Rooms:
+        type: "integer"
+      Typ:
+        type: "string"
+        enum:
+          - "house"
+          - "dacha"
+          - "area"
+  Areas:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+      Tittle:
+        type: "string"
+      MapMarker:
+        type: "string"
+      Price:
+        type: "string"
+      Description:
+        type: "string"
+      Link:
+        type: "string"
+      Typ:
+        type: "string"

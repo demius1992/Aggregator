@@ -12,43 +12,142 @@ type FlatsPostgres struct {
 }
 
 func (r *FlatsPostgres) GetOneRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	sum := make([]models.Flats, 0)
+	query := fmt.Sprintf(
+		"SELECT title, map_marker, price, inf, description, link, rooms\n"+
+			"FROM %s\n"+
+			"WHERE rooms = 1\n"+
+			"LIMIT 20 OFFSET $1", Flat)
+
+	if page > 1 {
+		page = page * 10
+	}
+
+	rows, err := r.db.Query(context.Background(), query, page)
+	if err != nil {
+		return sum, err
+	}
+	for rows.Next() {
+		var summary models.Flats
+		err := rows.Scan(&summary.Title, &summary.MapMarker, &summary.Price, &summary.Info,
+			&summary.Description, &summary.Link, &summary.Rooms)
+		if err != nil {
+			return sum, err
+		}
+		sum = append(sum, summary)
+	}
+	return sum, nil
 }
 
 func (r *FlatsPostgres) GetTwoRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	sum := make([]models.Flats, 0)
+	query := fmt.Sprintf(
+		"SELECT title, map_marker, price, inf, description, link, rooms\n"+
+			"FROM %s\n"+
+			"WHERE rooms = 2\n"+
+			"LIMIT 20 OFFSET $1", Flat)
+
+	if page > 1 {
+		page = page*20 - 1
+	}
+
+	rows, err := r.db.Query(context.Background(), query, page)
+	if err != nil {
+		return sum, err
+	}
+	for rows.Next() {
+		var summary models.Flats
+		err := rows.Scan(&summary.Title, &summary.MapMarker, &summary.Price, &summary.Info,
+			&summary.Description, &summary.Link, &summary.Rooms)
+		if err != nil {
+			return sum, err
+		}
+		sum = append(sum, summary)
+	}
+	return sum, nil
 }
 
 func (r *FlatsPostgres) GetThreeRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	sum := make([]models.Flats, 0)
+	query := fmt.Sprintf(
+		"SELECT title, map_marker, price, inf, description, link, rooms\n"+
+			"FROM %s\n"+
+			"WHERE rooms = 3\n"+
+			"LIMIT 20 OFFSET $1", Flat)
+
+	if page > 1 {
+		page = page*20 - 1
+	}
+
+	rows, err := r.db.Query(context.Background(), query, page)
+	if err != nil {
+		return sum, err
+	}
+	for rows.Next() {
+		var summary models.Flats
+		err := rows.Scan(&summary.Title, &summary.MapMarker, &summary.Price, &summary.Info,
+			&summary.Description, &summary.Link, &summary.Rooms)
+		if err != nil {
+			return sum, err
+		}
+		sum = append(sum, summary)
+	}
+	return sum, nil
 }
 
 func (r *FlatsPostgres) GetMoreThanThreeRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	sum := make([]models.Flats, 0)
+	query := fmt.Sprintf(
+		"SELECT title, map_marker, price, inf, description, link, rooms\n"+
+			"FROM %s\n"+
+			"WHERE rooms = 4\n"+
+			"LIMIT 20 OFFSET $1", Flat)
+
+	if page > 1 {
+		page = page*20 - 1
+	}
+
+	rows, err := r.db.Query(context.Background(), query, page)
+	if err != nil {
+		return sum, err
+	}
+	for rows.Next() {
+		var summary models.Flats
+		err := rows.Scan(&summary.Title, &summary.MapMarker, &summary.Price, &summary.Info,
+			&summary.Description, &summary.Link, &summary.Rooms)
+		if err != nil {
+			return sum, err
+		}
+		sum = append(sum, summary)
+	}
+	return sum, nil
 }
 
 func (r *FlatsPostgres) GetAllFlats(page int) ([]models.Flats, error) {
-	flats := make([]models.Flats, 0)
-	query := fmt.Sprintf("SELECT * FROM %s", "") //TODO
+	sum := make([]models.Flats, 0)
+	query := fmt.Sprintf(
+		"SELECT title, map_marker, price, inf, description, link, rooms\n"+
+			"FROM %s\n"+
+			"LIMIT 20 OFFSET $1", Flat)
 
-	rows, err := r.db.Query(context.Background(), query)
+	if page > 1 {
+		page = page*20 - 1
+	}
+
+	rows, err := r.db.Query(context.Background(), query, page)
 	if err != nil {
-		return nil, err
+		return sum, err
 	}
 	for rows.Next() {
-		var flt models.Flats
-		err := rows.Scan("") //TODO implement me
+		var summary models.Flats
+		err := rows.Scan(&summary.Title, &summary.MapMarker, &summary.Price, &summary.Info,
+			&summary.Description, &summary.Link, &summary.Rooms)
 		if err != nil {
-			return nil, err
+			return sum, err
 		}
-
-		flats = append(flats, flt)
+		sum = append(sum, summary)
 	}
-	return flats, nil
+	return sum, nil
 }
 
 func NewFlatsPostgres(db *pgxpool.Pool) *FlatsPostgres {

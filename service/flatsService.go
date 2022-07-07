@@ -10,28 +10,23 @@ type FlatsService struct {
 }
 
 func (f *FlatsService) GetAllFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetAllFlats(page)
 }
 
 func (f *FlatsService) GetOneRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetOneRoomFlats(page)
 }
 
 func (f *FlatsService) GetTwoRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetTwoRoomFlats(page)
 }
 
 func (f *FlatsService) GetThreeRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetThreeRoomFlats(page)
 }
 
 func (f *FlatsService) GetMoreThanThreeRoomFlats(page int) ([]models.Flats, error) {
-	//TODO implement me
-	panic("implement me")
+	return f.repo.GetMoreThanThreeRoomFlats(page)
 }
 
 func NewFlatsService(repo repository.Flats) *FlatsService {

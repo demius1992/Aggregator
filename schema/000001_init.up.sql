@@ -1,42 +1,39 @@
-CREATE TYPE cottageType as ENUM ('House', 'Dacha','Area');
-CREATE TYPE rent as ENUM ('flatsForDay', 'flatsLongRent','cottagesForDay','cottagesLongRent');
+CREATE TYPE cottage_type as ENUM ('house', 'dacha', 'area');
+CREATE TYPE rent as ENUM ('flatDayRent', 'flatLongRent', 'cottageDayRent', 'cottageLongRent');
 
 CREATE TABLE flats
 (
     id          SERIAL PRIMARY KEY,
     title       VARCHAR      NOT NULL,
-    mapMarker   VARCHAR(128) NOT NULL,
+    map_marker  VARCHAR(128) NOT NULL,
     price       VARCHAR(32)  NOT NULL,
-    info        VARCHAR      NOT NULL UNIQUE,
-    description VARCHAR      NOT NULL UNIQUE,
+    inf         VARCHAR      NOT NULL,
+    description VARCHAR      NOT NULL,
     link        VARCHAR      NOT NULL UNIQUE,
     rooms       INT          NOT NULL
 );
-
-
 
 CREATE TABLE cottages
 (
     id          SERIAL PRIMARY KEY,
     title       VARCHAR      NOT NULL,
-    mapMarker   VARCHAR(128) NOT NULL,
+    map_marker  VARCHAR(128) NOT NULL,
     price       VARCHAR(32)  NOT NULL,
-    info        VARCHAR      NOT NULL UNIQUE,
-    description VARCHAR      NOT NULL UNIQUE,
+    inf         VARCHAR      NOT NULL,
+    description VARCHAR      NOT NULL,
     link        VARCHAR      NOT NULL UNIQUE,
-    type        cottageType  NOT NULL
+    typ         cottage_type NOT NULL
 );
-
 
 CREATE TABLE flats_for_rent
 (
     id          SERIAL PRIMARY KEY,
     title       VARCHAR      NOT NULL,
-    mapMarker   VARCHAR(128) NOT NULL,
-    price       VARCHAR(32)  NOT NULL,
-    info        VARCHAR      NOT NULL UNIQUE,
-    description VARCHAR      NOT NULL UNIQUE,
+    map_marker  VARCHAR(128) NOT NULL,
+    price       VARCHAR      NOT NULL,
+    inf         VARCHAR      NOT NULL,
+    description VARCHAR      NOT NULL,
     link        VARCHAR      NOT NULL UNIQUE,
     rooms       INT,
-    type        rent         NOT NULL
+    typ         rent         NOT NULL
 );
